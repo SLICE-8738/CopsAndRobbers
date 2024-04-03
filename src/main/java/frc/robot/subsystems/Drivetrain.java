@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drivetrain extends SubsystemBase {
   private CANSparkMax backLeft, backRight, frontLeft, frontRight; // Back and front motors on left and right.
   private DifferentialDrive drivetrain; // Differential drive
+  private RelativeEncoder backLeftRelativeEncoder, backRightRelativeEncoder, frontLeftRelativeEncoder, frontRighRelativeEncoder; 
 
   /** Creates a new Drivetrain. */
   public Drivetrain() {
@@ -20,6 +22,8 @@ public class Drivetrain extends SubsystemBase {
     backRight = new CANSparkMax(18, MotorType.kBrushed);
     frontLeft = new CANSparkMax(16, MotorType.kBrushed);
     frontRight = new CANSparkMax(17, MotorType.kBrushed);
+
+    backLeftRelativeEncoder = backLeft.getEncoder();
 
     backLeft.follow(frontLeft);
     backRight.follow(frontRight);
