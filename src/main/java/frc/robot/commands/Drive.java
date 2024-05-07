@@ -32,7 +32,7 @@ public class Drive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(m_driverController.getLeftY(), m_driverController.getRightX());
+    m_drivetrain.drive(m_driverController.getRightX(), m_driverController.getLeftY());
   }
 
   // Called once the command ends or is interrupted.
