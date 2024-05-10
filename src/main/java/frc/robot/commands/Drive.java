@@ -38,28 +38,23 @@ public class Drive extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    totalTimer.start();
+    //totalTimer.start();
+    teamTimer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //m_drivetrain.drive(m_driverController.getRightX(), m_driverController.getLeftY());
-    while(totalTimer.get() < 301){
-      teamTimer.start();
-      while(teamTimer.get() < 31){
-        m_drivetrain.drive(m_teamOneController.getRightX(), m_teamTwoController.getLeftY());
-      }
-      m_drivetrain.drive(0, 0);
-      while(teamTimer.get() < 61) {
-        m_drivetrain.drive(m_teamTwoController.getRightX(), m_teamTwoController.getLeftY());
-      }
-      m_drivetrain.drive(0, 0);
+    if(teamTimer.get() < 31){
+      m_drivetrain.drive(m_teamOneController.getRightX(), m_teamOneController.getLeftY());
+    }
+    else if(teamTimer.get() < 61) {
+      m_drivetrain.drive(m_teamTwoController.getRightX(), m_teamTwoController.getLeftY());
+    }
+    if (teamTimer.get() > 61) {
       teamTimer.reset();
     }
-    totalTimer.stop();
-    totalTimer.reset();
-    isFinished();
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -71,5 +66,5 @@ public class Drive extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;}
+    return false;}
 }
