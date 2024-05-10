@@ -27,9 +27,10 @@ public class RobotContainer {
 
   private final Drivetrain m_drivetrain = new Drivetrain(); // Drivetrain Subsystem defined
   
-  private final CommandPS4Controller m_drivecontroller = new CommandPS4Controller(0);
+  private final CommandPS4Controller m_teamOneController = new CommandPS4Controller(0);
+  private final CommandPS4Controller m_teamTwoController = new CommandPS4Controller(1);
 
-  private final Drive m_drivecommand = new Drive(m_drivetrain, m_drivecontroller); // Drive Command defined
+  private final Drive m_drivecommand = new Drive(m_drivetrain, m_teamOneController, m_teamTwoController); // Drive Command defined
 
   
 
