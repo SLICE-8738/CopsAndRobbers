@@ -4,22 +4,18 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
-import frc.robot.subsystems.Drivetrain;
-public class Drive extends Command {
+import frc.robot.subsystems.Stopper;
 
-  private final Drivetrain m_drivetrain;
-  private final CommandPS4Controller m_driverController;
-  
+public class StopperUp extends Command {
 
-  /** Creates a new Drive. */
-  public Drive(Drivetrain drivetrain, CommandPS4Controller cont) {
-    m_drivetrain = drivetrain;
-    m_driverController = cont;
+  private Stopper m_Stopper;
+
+  /** Creates a new StopperUp. */
+  public StopperUp(Stopper stop) {
+    m_Stopper = stop;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrain);
+    addRequirements(m_Stopper);
   }
 
   // Called when the command is initially scheduled.
@@ -28,15 +24,11 @@ public class Drive extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    m_drivetrain.drive(m_driverController.getRightX(), m_driverController.getLeftY());
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_drivetrain.drive(0, 0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

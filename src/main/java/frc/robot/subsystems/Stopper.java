@@ -16,11 +16,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Stopper extends SubsystemBase {
   CANSparkMax stopper;
 
-
-  
   public Stopper() {
     stopper = new CANSparkMax(0, MotorType.kBrushless);
-
   }
 
   @Override
