@@ -16,9 +16,7 @@ public class Flywheels extends SubsystemBase {
   CANSparkMax flywheel;
 
   public Flywheels() {
-
     flywheel = new CANSparkMax(0, MotorType.kBrushless);
-
   }
   public void spin(double speed) {
       flywheel.set(speed);

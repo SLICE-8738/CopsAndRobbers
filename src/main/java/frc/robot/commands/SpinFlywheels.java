@@ -4,27 +4,34 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Flywheels;
 
 public class SpinFlywheels extends Command {
 
   private Flywheels m_flywheels;
+  private Timer timer;
 
   /** Creates a new SpinFlywheels. */
   public SpinFlywheels(Flywheels fly) {
     m_flywheels = fly;
+    timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_flywheels);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_flywheels.spin(0.5);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -35,6 +42,9 @@ public class SpinFlywheels extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(timer.get() == 3){
+      return true;
+    }
     return false;
   }
 }
