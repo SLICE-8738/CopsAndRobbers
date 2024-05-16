@@ -8,8 +8,13 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.SpinFlywheels;
+import frc.robot.commands.StopperDown;
+import frc.robot.commands.StopperUp;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Flywheels;
+import frc.robot.subsystems.Stopper;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -26,10 +31,21 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final Drivetrain m_drivetrain = new Drivetrain(); // Drivetrain Subsystem defined
+
+  private final Flywheels m_flywheels = new Flywheels();
+  private final Stopper m_Stopper = new Stopper();
   
   private final CommandPS4Controller m_drivecontroller = new CommandPS4Controller(0);
 
   private final Drive m_drivecommand = new Drive(m_drivetrain, m_drivecontroller); // Drive Command defined
+
+  private final SpinFlywheels m_SpinFlywheels = new SpinFlywheels(m_flywheels);
+  private final StopperUp m_StopperUp = new StopperUp(m_Stopper);
+  private final StopperDown m_StopperDown = new StopperDown(m_Stopper);
+
+  private final Trigger m_FlywheelsTrigger = new Trigger(m_drivecontroller.circle());
+  private final Trigger m_StopUpTrigger = new Trigger(m_drivecontroller.square());
+  private final Trigger m_StopDownTrigger = new Trigger(m_drivecontroller.triangle());
 
   
 
@@ -51,9 +67,11 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+
+    m_FlywheelsTrigger.toggleOnTrue(m_SpinFlywheels);
+    m_StopUpTrigger.onTrue(m_StopperUp);
+    m_StopDownTrigger.onTrue(m_StopperDown);
+    
 
   }
 

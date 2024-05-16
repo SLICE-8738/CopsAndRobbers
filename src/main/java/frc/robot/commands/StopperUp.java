@@ -16,6 +16,7 @@ public class StopperUp extends Command {
     m_Stopper = stop;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_Stopper);
+   
   }
 
   // Called when the command is initially scheduled.
@@ -24,15 +25,27 @@ public class StopperUp extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (m_Stopper.getPosition() < 90) {
+       m_Stopper.stopperSpeed(.25);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_Stopper.stopperSpeed(0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    
+    if (m_Stopper.getPosition() >= 90) {
+       return true;
+    } 
+
     return false;
+
   }
 }
