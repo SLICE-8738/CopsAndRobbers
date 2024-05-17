@@ -16,9 +16,12 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Flywheels;
 import frc.robot.subsystems.Stopper;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -36,9 +39,10 @@ public class RobotContainer {
   private final Flywheels m_flywheels = new Flywheels();
   private final Stopper m_Stopper = new Stopper();
   
-  private final CommandPS4Controller m_drivecontroller = new CommandPS4Controller(0);
+  //private final CommandPS4Controller m_drivecontroller = new CommandPS4Controller(0);
+  private final Joystick m_Joystick = new Joystick(0);
 
-  private final Drive m_drivecommand = new Drive(m_drivetrain, m_drivecontroller); // Drive Command defined
+  private final Drive m_drivecommand = new Drive(m_drivetrain, m_Joystick); // Drive Command defined
 
   private final SpinFlywheels m_SpinFlywheels = new SpinFlywheels(m_flywheels);
   private final StopperUp m_StopperUp = new StopperUp(m_Stopper);
@@ -46,10 +50,10 @@ public class RobotContainer {
 
   private final Bowl m_Bowl = new Bowl(m_flywheels, m_Stopper);
 
-  private final Trigger m_FlywheelsTrigger = new Trigger(m_drivecontroller.circle());
-  private final Trigger m_StopUpTrigger = new Trigger(m_drivecontroller.triangle());
-  private final Trigger m_StopDownTrigger = new Trigger(m_drivecontroller.square());
-  private final Trigger m_SequentialTrigger = new Trigger(m_drivecontroller.cross());
+  //private final Trigger m_FlywheelsTrigger = new Trigger(m_drivecontroller.circle());
+  //private final Trigger m_StopUpTrigger = new Trigger(m_drivecontroller.triangle());
+  //private final Trigger m_StopDownTrigger = new Trigger(m_drivecontroller.square());
+  private final JoystickButton m_Trigger = new JoystickButton(m_Joystick, 1);
 
   
 
@@ -72,10 +76,11 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    m_FlywheelsTrigger.toggleOnTrue(m_SpinFlywheels);
-    m_StopUpTrigger.onTrue(m_StopperUp);
-    m_StopDownTrigger.onTrue(m_StopperDown);
-    m_SequentialTrigger.onTrue(m_Bowl);
+    //m_FlywheelsTrigger.toggleOnTrue(m_SpinFlywheels);
+    //m_StopUpTrigger.onTrue(m_StopperUp);
+    //m_StopDownTrigger.onTrue(m_StopperDown);
+    m_Trigger.onTrue(m_Bowl);
+      
     
 
   }

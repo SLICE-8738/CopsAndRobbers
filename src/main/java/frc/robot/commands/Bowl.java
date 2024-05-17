@@ -22,7 +22,7 @@ public class Bowl extends SequentialCommandGroup {
     stopper = stop;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SpinFlywheels(flywheels), new StopperUp(stopper), new WaitCommand(4), new StopperDown(stopper)); // Spin the flywheels and move the stopper up.
+    addCommands(new SpinFlywheels(flywheels), new StopperUp(stopper), new WaitCommand(2), new StopperDown(stopper)); // Spin the flywheels and move the stopper up.
   }
   
 }

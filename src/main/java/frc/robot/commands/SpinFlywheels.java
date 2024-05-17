@@ -30,22 +30,26 @@ public class SpinFlywheels extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_flywheels.spin(0.5);
+    if(timer.get() < 3){
+      m_flywheels.spin(0.5);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_flywheels.spin(0);
+    timer.reset();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(timer.get() == 3){
+    if(timer.get() >= 3){
       return true;
+    } else{
+       return false;
     }
-    return false;
   }
   
 }
