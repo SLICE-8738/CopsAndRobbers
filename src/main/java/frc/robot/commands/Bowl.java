@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Flywheels;
 import frc.robot.subsystems.Stopper;
 
@@ -16,14 +17,12 @@ public class Bowl extends SequentialCommandGroup {
   private Stopper stopper;
 
   /** Creates a new Bowl. */
-  public Bowl() {
+  public Bowl(Flywheels fly, Stopper stop) {
+    flywheels = fly;
+    stopper = stop;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SpinFlywheels(flywheels), new StopperUp(stopper)); // Spin the flywheels and move the stopper up.
-    try {
-      wait(1000); // Wait for a second before putting it down again.
-    } catch (InterruptedException e){}
-    addCommands(new StopperDown(stopper)); // Put the stopper down.
+    addCommands(new SpinFlywheels(flywheels), new StopperUp(stopper), new WaitCommand(4), new StopperDown(stopper)); // Spin the flywheels and move the stopper up.
   }
   
 }

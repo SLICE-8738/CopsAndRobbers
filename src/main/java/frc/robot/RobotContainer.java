@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.Bowl;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SpinFlywheels;
@@ -43,9 +44,12 @@ public class RobotContainer {
   private final StopperUp m_StopperUp = new StopperUp(m_Stopper);
   private final StopperDown m_StopperDown = new StopperDown(m_Stopper);
 
+  private final Bowl m_Bowl = new Bowl(m_flywheels, m_Stopper);
+
   private final Trigger m_FlywheelsTrigger = new Trigger(m_drivecontroller.circle());
-  private final Trigger m_StopUpTrigger = new Trigger(m_drivecontroller.square());
-  private final Trigger m_StopDownTrigger = new Trigger(m_drivecontroller.triangle());
+  private final Trigger m_StopUpTrigger = new Trigger(m_drivecontroller.triangle());
+  private final Trigger m_StopDownTrigger = new Trigger(m_drivecontroller.square());
+  private final Trigger m_SequentialTrigger = new Trigger(m_drivecontroller.cross());
 
   
 
@@ -71,6 +75,7 @@ public class RobotContainer {
     m_FlywheelsTrigger.toggleOnTrue(m_SpinFlywheels);
     m_StopUpTrigger.onTrue(m_StopperUp);
     m_StopDownTrigger.onTrue(m_StopperDown);
+    m_SequentialTrigger.onTrue(m_Bowl);
     
 
   }
