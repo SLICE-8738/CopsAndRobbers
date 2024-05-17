@@ -9,6 +9,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.Bowl;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.FlywheelCommand;
 import frc.robot.commands.SpinFlywheels;
 import frc.robot.commands.StopperDown;
 import frc.robot.commands.StopperUp;
@@ -37,6 +38,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain(); // Drivetrain Subsystem defined
 
   private final Flywheels m_flywheels = new Flywheels();
+
   private final Stopper m_Stopper = new Stopper();
   
   //private final CommandPS4Controller m_drivecontroller = new CommandPS4Controller(0);
@@ -48,13 +50,16 @@ public class RobotContainer {
   private final StopperUp m_StopperUp = new StopperUp(m_Stopper);
   private final StopperDown m_StopperDown = new StopperDown(m_Stopper);
 
+  private final FlywheelCommand m_FlywheelCommand = new FlywheelCommand(m_flywheels);
+
   private final Bowl m_Bowl = new Bowl(m_flywheels, m_Stopper);
 
   //private final Trigger m_FlywheelsTrigger = new Trigger(m_drivecontroller.circle());
   //private final Trigger m_StopUpTrigger = new Trigger(m_drivecontroller.triangle());
   //private final Trigger m_StopDownTrigger = new Trigger(m_drivecontroller.square());
-  private final JoystickButton m_Trigger = new JoystickButton(m_Joystick, 1);
-  private final JoystickButton m_FlywheelButton = new JoystickButton(m_Joystick, 2);
+  //private final JoystickButton m_Trigger = new JoystickButton(m_Joystick, 1);
+  private final JoystickButton m_FlywheelTrigger = new JoystickButton(m_Joystick, 1);
+  //private final JoystickButton m_FlywheelButton = new JoystickButton(m_Joystick, 2);
   private final JoystickButton m_StopUpButton = new JoystickButton(m_Joystick, 3);
   private final JoystickButton m_StopDownButton = new JoystickButton(m_Joystick, 4);
 
@@ -82,8 +87,8 @@ public class RobotContainer {
     //m_FlywheelsTrigger.toggleOnTrue(m_SpinFlywheels);
     //m_StopUpTrigger.onTrue(m_StopperUp);
     //m_StopDownTrigger.onTrue(m_StopperDown);
-    m_Trigger.onTrue(m_Bowl);
-    m_FlywheelButton.onTrue(m_SpinFlywheels);
+    //m_Trigger.onTrue(m_Bowl);
+    m_FlywheelTrigger.toggleOnTrue(m_FlywheelCommand);
     m_StopUpButton.onTrue(m_StopperUp);
     m_StopDownButton.onTrue(m_StopperDown);
       
