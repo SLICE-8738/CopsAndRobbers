@@ -54,6 +54,9 @@ public class RobotContainer {
   //private final Trigger m_StopUpTrigger = new Trigger(m_drivecontroller.triangle());
   //private final Trigger m_StopDownTrigger = new Trigger(m_drivecontroller.square());
   private final JoystickButton m_Trigger = new JoystickButton(m_Joystick, 1);
+  private final JoystickButton m_FlywheelButton = new JoystickButton(m_Joystick, 2);
+  private final JoystickButton m_StopUpButton = new JoystickButton(m_Joystick, 3);
+  private final JoystickButton m_StopDownButton = new JoystickButton(m_Joystick, 4);
 
   
 
@@ -80,6 +83,9 @@ public class RobotContainer {
     //m_StopUpTrigger.onTrue(m_StopperUp);
     //m_StopDownTrigger.onTrue(m_StopperDown);
     m_Trigger.onTrue(m_Bowl);
+    m_FlywheelButton.onTrue(m_SpinFlywheels);
+    m_StopUpButton.onTrue(m_StopperUp);
+    m_StopDownButton.onTrue(m_StopperDown);
       
     
 
