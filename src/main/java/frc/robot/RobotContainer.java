@@ -7,9 +7,11 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveJoystick;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -25,13 +27,16 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
+  private final Joystick m_teamTwoJoystick = new Joystick(0);
+  private final Joystick m_teamOneJoystick = new Joystick(1);
+
   private final Drivetrain m_drivetrain = new Drivetrain(); // Drivetrain Subsystem defined
   
-  private final CommandPS4Controller m_teamOneController = new CommandPS4Controller(0);
-  private final CommandPS4Controller m_teamTwoController = new CommandPS4Controller(1);
+  //private final CommandPS4Controller m_teamOneController = new CommandPS4Controller(0);
+  //private final CommandPS4Controller m_teamTwoController = new CommandPS4Controller(1);
 
-  private final Drive m_drivecommand = new Drive(m_drivetrain, m_teamOneController, m_teamTwoController); // Drive Command defined
-
+  //private final Drive m_drivecommand = new Drive(m_drivetrain, m_teamOneController, m_teamTwoController); // Drive Command defined
+  private final DriveJoystick m_drivecommandJoystick = new DriveJoystick(m_drivetrain, m_teamOneJoystick, m_teamTwoJoystick);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -39,7 +44,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    m_drivetrain.setDefaultCommand(m_drivecommand);
+    m_drivetrain.setDefaultCommand(m_drivecommandJoystick);
   }
 
   /**
