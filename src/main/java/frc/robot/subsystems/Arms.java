@@ -30,6 +30,14 @@ public class Arms extends SubsystemBase {
     rightArm.set(moveRight);
   }
 
+  public double getPositionLeft() {
+    return leftArmEncoder.getPosition();
+  }
+
+    public double getPositionRight() {
+    return rightArmEncoder.getPosition();
+  }
+
 
   @Override
   public void periodic() {
