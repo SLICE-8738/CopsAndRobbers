@@ -34,7 +34,7 @@ public class Arms extends SubsystemBase {
     return leftArmEncoder.getPosition();
   }
 
-    public double getPositionRight() {
+  public double getPositionRight() {
     return rightArmEncoder.getPosition();
   }
 

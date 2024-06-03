@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
@@ -11,12 +12,14 @@ import frc.robot.subsystems.Arms;
 
 public class MoveArms extends Command {
 
-  Arms m_Arms;
-  CommandPS4Controller m_OperatorController;
+  private final Arms m_Arms;
+  //CommandPS4Controller m_OperatorController;
+  private final Joystick m_Joystick;
 
   /** Creates a new MoveArms. */
-  public MoveArms(Arms a, CommandPS4Controller cont) {
+  public MoveArms(Arms a, Joystick joy) {
     m_Arms = a;
+    m_Joystick = joy;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_Arms);
   }
@@ -28,12 +31,14 @@ public class MoveArms extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Arms.moveArms(m_OperatorController.getLeftY(), m_OperatorController.getRightY());
+    m_Arms.moveArms(m_Joystick.getY(), m_Joystick.getY());
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_Arms.moveArms(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
