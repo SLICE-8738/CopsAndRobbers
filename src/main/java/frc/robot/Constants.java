@@ -16,4 +16,7 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+  private static final double SELF_RIGHTING_ARM_ERROR_TOLERANCE = 0;
+
 }
