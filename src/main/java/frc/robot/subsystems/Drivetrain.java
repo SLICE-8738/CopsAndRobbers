@@ -11,7 +11,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -44,15 +44,22 @@ public class Drivetrain extends SubsystemBase {
 
     drivetrain = new DifferentialDrive(frontLeft, frontRight);
 
-    
-    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(),leftEncoder.getPosition(),rightEncoder.getPosition()); //MIGHT NEED TO BE CHANGED 
-
     rightEncoder.setPositionConversionFactor(DriveConstants.kLinearDistanceConversionFactor);
     leftEncoder.setPositionConversionFactor(DriveConstants.kLinearDistanceConversionFactor);
     rightEncoder.setVelocityConversionFactor(DriveConstants.kLinearDistanceConversionFactor / 60);
     leftEncoder.setVelocityConversionFactor(DriveConstants.kLinearDistanceConversionFactor / 60);
+
+    navX.reset();
+
+    resetEncoders();
+        
+    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(),leftEncoder.getPosition(),rightEncoder.getPosition()); //MIGHT NEED TO BE CHANGED 
   }
 
+  public void resetEncoders() {
+    rightEncoder.setPosition(0);
+    leftEncoder.setPosition(0);
+  }
   public void drive(double forwardSpeed, double rotationalSpeed){
     drivetrain.arcadeDrive(forwardSpeed, rotationalSpeed);
   }
@@ -77,9 +84,20 @@ public class Drivetrain extends SubsystemBase {
     drivetrain.arcadeDrive(fwd, rot);
   }
 
+  public static double getTurnRate() {
+    return navX.getRate();
+  }
+  public static double getHeading() {
+    return navX.getRotation2d().getDegrees();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     m_odometry.update(navX.getRotation2d(), leftEncoder.getPosition(), rightEncoder.getPosition());
+
+    SmartDashboard.putNumber("Left encoder value meters", getLeftEncoderPosition());
+    SmartDashboard.putNumber("Right encoder value meters", getRightEncoderPosition());
+    SmartDashboard.putNumber("Gyro heading", getHeading());
   }
 }
