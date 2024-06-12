@@ -4,6 +4,9 @@
 
 package frc.robot.commands;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.subsystems.Drivetrain;
@@ -13,13 +16,14 @@ public class Drive extends Command {
 
   private final Drivetrain m_drivetrain;
   private final CommandPS4Controller m_driverController;
-
+  public static final AHRS navX = AHRS(SPI.Port.)
   /** Creates a new Drive. */
   public Drive(Drivetrain drivetrain, CommandPS4Controller cont) {
     m_drivetrain = drivetrain;
     m_driverController = cont;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
+    
   }
 
   // Called when the command is initially scheduled.
