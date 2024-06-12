@@ -5,37 +5,81 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
 
 public class Drivetrain extends SubsystemBase {
-  private 
+  
+  public static final AHRS navX = new AHRS(SPI.Port.kMXP);
   private CANSparkMax backLeft, backRight, frontLeft, frontRight; // Back and front motors on left and right.
   private DifferentialDrive drivetrain; // Differential drive
+  RelativeEncoder leftEncoder = frontLeft.getEncoder();
+  RelativeEncoder rightEncoder = frontRight.getEncoder();
+  private final DifferentialDriveOdometry m_odometry;
 
   /** Creates a new Drivetrain. */
+
   public Drivetrain() {
-    gyroy = new gyr
     backLeft = new CANSparkMax(15, MotorType.kBrushed);
     backRight = new CANSparkMax(18, MotorType.kBrushed);
     frontLeft = new CANSparkMax(16, MotorType.kBrushed);
     frontRight = new CANSparkMax(17, MotorType.kBrushed);
 
+    leftEncoder.setPosition(0);
+    rightEncoder.setPosition(0);
+
     backLeft.follow(frontLeft);
     backRight.follow(frontRight);
 
     drivetrain = new DifferentialDrive(frontLeft, frontRight);
+
+    
+    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(),leftEncoder.getPosition(),rightEncoder.getPosition()); //MIGHT NEED TO BE CHANGED 
+
+    rightEncoder.setPositionConversionFactor(DriveConstants.kLinearDistanceConversionFactor);
+    leftEncoder.setPositionConversionFactor(DriveConstants.kLinearDistanceConversionFactor);
+    rightEncoder.setVelocityConversionFactor(DriveConstants.kLinearDistanceConversionFactor / 60);
+    leftEncoder.setVelocityConversionFactor(DriveConstants.kLinearDistanceConversionFactor / 60);
   }
 
   public void drive(double forwardSpeed, double rotationalSpeed){
     drivetrain.arcadeDrive(forwardSpeed, rotationalSpeed);
   }
 
+  public double getLeftEncoderPosition() {
+    return leftEncoder.getPosition();
+  }
+
+  public double getRightEncoderPosition() {
+    return rightEncoder.getPosition();
+  }
+
+  public double getLeftEncoderVelocity() {
+    return leftEncoder.getVelocity();
+  }
+
+  public double getRightEncoderVelocity() {
+    return rightEncoder.getVelocity();
+  }
+
+  public void arcadeDrive(double fwd, double rot) {
+    drivetrain.arcadeDrive(fwd, rot);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    m_odometry.update(navX.getRotation2d(), leftEncoder.getPosition(), rightEncoder.getPosition());
   }
 }

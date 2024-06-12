@@ -19,7 +19,6 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
-<<<<<<< HEAD
   
   public static final class DriveConstants{
     public static final double ksVolts = 0;
@@ -36,10 +35,15 @@ public final class Constants {
     //Reasonable baseline values for a RAMSETE follower in units of meters and seconds 
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
+
+    public static final double kGearRatio = 0;
+    public static final double kWheelRadiusInches = 0;
+
+    public static final double kLinearDistanceConversionFactor = (Units.inchesToMeters(1/(kGearRatio * 2 * Math.PI*Units.inchesToMeters(kWheelRadiusInches)) * 10));
   }
 
 
   private static final double SELF_RIGHTING_ARM_ERROR_TOLERANCE = 0;
 
->>>>>>> 09d5733dcff1669d6aec4e102eee711ed7625325
+
 }
