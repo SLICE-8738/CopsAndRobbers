@@ -34,8 +34,17 @@ public class Arms extends SubsystemBase {
     return leftArmEncoder.getPosition();
   }
 
-    public double getPositionRight() {
+  public double getPositionRight() {
     return rightArmEncoder.getPosition();
+  }
+
+  public double getPositionAverage(){
+    return (rightArmEncoder.getPosition() + leftArmEncoder.getPosition()) / 2;
+  }
+
+  public double[] getPositionBoth(){
+    double[] both = {leftArmEncoder.getPosition(), rightArmEncoder.getPosition()};
+    return both;
   }
 
 

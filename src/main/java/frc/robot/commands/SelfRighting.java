@@ -10,15 +10,12 @@ import frc.robot.subsystems.Arms;
 
 public class SelfRighting extends Command {
   /** Creates a new SelfRighting. */
-  private Arms left_Arm;
-  private Arms right_Arm;
+  private Arms m_Arms;
 
-
-  public SelfRighting(Arms left, Arms right) {
+  public SelfRighting(Arms arm) {
     // Use addRequirements() here to declare subsystem dependencies.
-    left_Arm = left;
-    right_Arm = right;
-    addRequirements(left_Arm);
+    m_Arms = arm;
+    addRequirements(m_Arms);
   }
 
   // Called when the command is initially scheduled.
@@ -28,18 +25,21 @@ public class SelfRighting extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (left_Arm.getPositionLeft() > 0) {
-
+    if (m_Arms.getPositionLeft() < 180) {
+      m_Arms.moveArms(0.35, 0.35);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_Arms.moveArms(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(
     return false;
   }
 }

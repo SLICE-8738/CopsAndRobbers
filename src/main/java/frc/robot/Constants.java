@@ -19,6 +19,7 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+<<<<<<< HEAD
   
   public static final class DriveConstants{
     public static final double ksVolts = 0;
@@ -36,4 +37,9 @@ public final class Constants {
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
   }
+
+
+  private static final double SELF_RIGHTING_ARM_ERROR_TOLERANCE = 0;
+
+>>>>>>> 09d5733dcff1669d6aec4e102eee711ed7625325
 }

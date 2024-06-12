@@ -12,6 +12,7 @@ import frc.robot.commands.MoveArms;
 import frc.robot.subsystems.Arms;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -30,11 +31,13 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain(); // Drivetrain Subsystem defined
   private final Arms m_Arms = new Arms();
   
-  private final CommandPS4Controller m_drivecontroller = new CommandPS4Controller(0);
-  private final CommandPS4Controller m_operatorcontroller = new CommandPS4Controller(1);
+  //private final CommandPS4Controller m_drivecontroller = new CommandPS4Controller(0);
+  //private final CommandPS4Controller m_operatorcontroller = new CommandPS4Controller(1);
+  private final Joystick m_driveJoystick = new Joystick(0);
+  private final Joystick m_operatorJoystick = new Joystick(1);
 
-  private final Drive m_drivecommand = new Drive(m_drivetrain, m_drivecontroller); // Drive Command defined
-  private final MoveArms m_MoveArms = new MoveArms(m_Arms, m_operatorcontroller);
+  private final Drive m_drivecommand = new Drive(m_drivetrain, m_driveJoystick); // Drive Command defined
+  private final MoveArms m_MoveArms = new MoveArms(m_Arms, m_operatorJoystick);
 
   
 
