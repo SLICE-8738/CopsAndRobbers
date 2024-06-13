@@ -19,7 +19,7 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
-  
+  //current limit = 40 amphs
   public static final class DriveConstants{
     public static final double ksVolts = 0;
     public static final double kvVoltSecondsPerMeter = 0;
@@ -36,10 +36,19 @@ public final class Constants {
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
 
-    public static final double kGearRatio = 0;
+    public static final double kGearRatio = 1/36;
     public static final double kWheelRadiusInches = 0;
 
     public static final double kLinearDistanceConversionFactor = (Units.inchesToMeters(1/(kGearRatio * 2 * Math.PI*Units.inchesToMeters(kWheelRadiusInches)) * 10));
+  }
+
+  public static final class ArmConstants{
+
+    public static final double ArmKP = 0;
+    public static final double ArmKI = 0;
+    public static final double ArmKD = 0;
+    public static final double ArmFF = 0;
+
   }
 
 

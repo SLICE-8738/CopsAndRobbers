@@ -59,7 +59,7 @@ public class Drivetrain extends SubsystemBase {
     resetEncoders();
     
     
-    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(),leftEncoder.getPosition(),rightEncoder.getPosition()); //MIGHT NEED TO BE CHANGED 
+    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d()); //MIGHT NEED TO BE CHANGED 
     m_odometry.resetPosition(new Pose2d(), navX.getRotation2d());
   }
 
@@ -113,9 +113,9 @@ public class Drivetrain extends SubsystemBase {
   public static double getHeading() {
     return navX.getRotation2d().getDegrees();
   }
-  public Pose2d getPose() [
+  public Pose2d getPose() {
     return m_odometry.getPoseMeters();
-  ]
+  }
 
   public void resetOdometry(Pose2d pose) {
     resetEncoders();

@@ -6,14 +6,20 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ArmConstants;
 
 public class Arms extends SubsystemBase {
 
   CANSparkMax leftArm, rightArm;
   RelativeEncoder leftArmEncoder, rightArmEncoder;
+  SparkPIDController leftArmPIDs, rightArmPIDs;
+
+  double startPosition;
+  double targetPosition;
 
   /** Creates a new Arms. */
   public Arms() {
@@ -23,8 +29,26 @@ public class Arms extends SubsystemBase {
     leftArmEncoder = leftArm.getEncoder();
     rightArmEncoder = rightArm.getEncoder();
 
+    startPosition = getPositionAverage();
+    targetPosition = getPositionAverage();
+
+    leftArmPIDs = leftArm.getPIDController();
+    rightArmPIDs = rightArm.getPIDController();
+
+    leftArmPIDs.setP(ArmConstants.ArmKP);
+    leftArmPIDs.setI(ArmConstants.ArmKI);
+    leftArmPIDs.setD(ArmConstants.ArmKD);
+    rightArmPIDs.setP(ArmConstants.ArmKP);
+    rightArmPIDs.setI(ArmConstants.ArmKI);
+    rightArmPIDs.setD(ArmConstants.ArmKD);
+
   }
 
+  /**
+   * moves the drivetrain with manual speed inputs
+   * @param moveLeft
+   * @param moveRight
+   */
   public void moveArms(double moveLeft, double moveRight){
     leftArm.set(moveLeft);
     rightArm.set(moveRight);
@@ -45,6 +69,11 @@ public class Arms extends SubsystemBase {
   public double[] getPositionBoth(){
     double[] both = {leftArmEncoder.getPosition(), rightArmEncoder.getPosition()};
     return both;
+  }
+  
+  public void setPIDController(double positionSet){
+    targetPosition = positionSet;
+    
   }
 
 
