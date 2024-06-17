@@ -20,7 +20,6 @@ public class Drive extends Command {
   public Drive(Drivetrain drivetrain, Joystick joy) {
     m_drivetrain = drivetrain;
     m_Joystick = joy;
-
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
     
