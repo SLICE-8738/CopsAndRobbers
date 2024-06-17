@@ -27,8 +27,6 @@ public final class Constants {
 
     //public static final double kLinearDistanceConversionFactor = (Units.inchesToMeters(1/(kGearRatio * 2 * Math.PI*Units.inchesToMeters(kWheelRadiusInches)) * 10));
 
-    public static final double kAutoDriveForwardSpeed = 0.5;
-    public static final double kAutoDriveForwardDistance = 1.5;
     public static final double kEncoderTick2Meter = 1.0 / 4096.0 * 0.128 * Math.PI;
     public static final int kLeftMotorPort = 0;
     public static final int kRightMotorPort = 1;
@@ -44,6 +42,11 @@ public final class Constants {
 
   }
 
+  public static final class AutoConstants {
+    public static final double kAutoDriveDistanceInches = 60;
+    public static final double kAutoBackupDistanceInches = 20;
+    public static final double kAutoDriveSpeed = 0.5;
+  }
 
   private static final double SELF_RIGHTING_ARM_ERROR_TOLERANCE = 0;
 
