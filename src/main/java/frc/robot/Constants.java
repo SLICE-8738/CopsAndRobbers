@@ -21,26 +21,19 @@ public final class Constants {
   }
   //current limit = 40 amphs
   public static final class DriveConstants{
-    public static final double ksVolts = 0;
-    public static final double kvVoltSecondsPerMeter = 0;
-    public static final double kaVoltSecondsSquaredPerMeter = 0;
-    public static final double kPDriveVel = 0;
 
-    public static final double kTrackWidthMeters = Units.inchesToMeters(0);
-    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+    //public static final double kGearRatio = 1/36;
+    //public static final double kWheelRadiusInches = 0;
 
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    //public static final double kLinearDistanceConversionFactor = (Units.inchesToMeters(1/(kGearRatio * 2 * Math.PI*Units.inchesToMeters(kWheelRadiusInches)) * 10));
 
-    //Reasonable baseline values for a RAMSETE follower in units of meters and seconds 
-    public static final double kRamseteB = 2;
-    public static final double kRamseteZeta = 0.7;
+    public static final double kAutoDriveForwardSpeed = 0.5;
+    public static final double kAutoDriveForwardDistance = 1.5;
+    public static final double kEncoderTick2Meter = 1.0 / 4096.0 * 0.128 * Math.PI;
+    public static final int kLeftMotorPort = 0;
+    public static final int kRightMotorPort = 1;
 
-    public static final double kGearRatio = 1/36;
-    public static final double kWheelRadiusInches = 0;
-
-    public static final double kLinearDistanceConversionFactor = (Units.inchesToMeters(1/(kGearRatio * 2 * Math.PI*Units.inchesToMeters(kWheelRadiusInches)) * 10));
-  }
+    }
 
   public static final class ArmConstants{
 
