@@ -30,9 +30,7 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDrive drivetrain; // Differential drive
   RelativeEncoder leftEncoder = frontLeft.getEncoder();
   RelativeEncoder rightEncoder = frontRight.getEncoder();
-  //private Spark driveLeftMotor = new Spark(DriveConstants.kLeftMotorPort);
-  //private Spark driveRightMotor = new Spark(DriveConstants.kRightMotorPort);
-
+  
   /** Creates a new Drivetrain. */
 
   public Drivetrain() {
