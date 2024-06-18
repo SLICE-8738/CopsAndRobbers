@@ -4,17 +4,21 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Arms;
 
+public class MoveArmsSeperate extends Command {
 
-public class SelfRighting extends Command {
-  /** Creates a new SelfRighting. */
   private Arms m_Arms;
+  private Joystick m_driverJoystick, m_operatorJoystick;
 
-  public SelfRighting(Arms arm) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  /** Creates a new MoveArmsSeperate. */
+  public MoveArmsSeperate(Arms arm, Joystick dJ, Joystick oJ) {
     m_Arms = arm;
+    m_driverJoystick = dJ;
+    m_operatorJoystick = oJ;
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_Arms);
   }
 
@@ -25,9 +29,7 @@ public class SelfRighting extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_Arms.getPositionLeft() < 180) {
-      m_Arms.moveArms(0.35, 0.35);
-    }
+    m_Arms.moveArms(m_driverJoystick.getX() / 4, m_operatorJoystick.getX() / 4);
   }
 
   // Called once the command ends or is interrupted.

@@ -6,8 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
-import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import frc.robot.subsystems.Arms;
 
 public class MoveArms extends Command {
@@ -31,7 +29,7 @@ public class MoveArms extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Arms.moveArms(m_Joystick.getY(), m_Joystick.getY());
+    m_Arms.moveArms(m_Joystick.getY() / 4, m_Joystick.getY() / 4);
   }
 
   // Called once the command ends or is interrupted.

@@ -3,26 +3,22 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ExampleSubsystem;
 
 public class Drive extends Command {
 
-  private final Drivetrain m_drivetrain;
+  private Drivetrain m_drivetrain;
+  private Joystick m_driverjoystick;
 
-  private final Joystick m_Joystick;
-
-
-  /** Creates a new Drive. */
-  public Drive(Drivetrain drivetrain, Joystick joy) {
-    m_drivetrain = drivetrain;
-    m_Joystick = joy;
+  /** Creates a new drive. */
+  public Drive(Drivetrain dT, Joystick joy) {
+    m_drivetrain = dT;
+    m_driverjoystick = joy;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrain);
-    
+    addRequirements(m_drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -32,7 +28,7 @@ public class Drive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(m_Joystick.getX(), m_Joystick.getY());
+    m_drivetrain.drive(m_driverjoystick.getX(), m_driverjoystick.getY());
   }
 
   // Called once the command ends or is interrupted.

@@ -23,11 +23,17 @@ public class Arms extends SubsystemBase {
 
   /** Creates a new Arms. */
   public Arms() {
-    leftArm = new CANSparkMax(0, MotorType.kBrushed);
-    rightArm = new CANSparkMax(0, MotorType.kBrushed);
+    leftArm = new CANSparkMax(1, MotorType.kBrushless);
+    rightArm = new CANSparkMax(16, MotorType.kBrushless);
 
+    leftArm.setInverted(true);
+    leftArm.setSmartCurrentLimit(40);
+    rightArm.setSmartCurrentLimit(40);
     leftArmEncoder = leftArm.getEncoder();
     rightArmEncoder = rightArm.getEncoder();
+
+    leftArmEncoder.setPositionConversionFactor(36/1);
+    rightArmEncoder.setPositionConversionFactor(36/1);
 
     startPosition = getPositionAverage();
     targetPosition = getPositionAverage();
@@ -70,12 +76,6 @@ public class Arms extends SubsystemBase {
     double[] both = {leftArmEncoder.getPosition(), rightArmEncoder.getPosition()};
     return both;
   }
-  
-  public void setPIDController(double positionSet){
-    targetPosition = positionSet;
-    
-  }
-
 
   @Override
   public void periodic() {
