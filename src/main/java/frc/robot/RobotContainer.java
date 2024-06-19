@@ -13,6 +13,7 @@ import frc.robot.commands.MoveArmsSeperate;
 import frc.robot.subsystems.Arms;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Limelight;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
@@ -29,6 +30,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
+  private final Limelight m_Limelight = new Limelight();
 
   private final Drivetrain m_drivetrain = new Drivetrain(); // Drivetrain Subsystem defined
   private final Arms m_Arms = new Arms();
