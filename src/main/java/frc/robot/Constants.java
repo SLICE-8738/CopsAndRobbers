@@ -48,6 +48,12 @@ public final class Constants {
     public static final double kAutoDriveSpeed = 0.5;
   }
 
+  public static final class PIDConstants {
+    public static final double kP = 4.0; // TODO: tune the PID values
+    public static final double kI = 2.0;
+    public static final double kD = 2.0;
+  }
+
   private static final double SELF_RIGHTING_ARM_ERROR_TOLERANCE = 0;
 
 
