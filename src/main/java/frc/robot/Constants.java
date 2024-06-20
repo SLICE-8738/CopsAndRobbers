@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
 /**
@@ -31,6 +33,7 @@ public final class Constants {
     public static final int kLeftMotorPort = 0;
     public static final int kRightMotorPort = 1;
 
+
     }
 
   public static final class ArmConstants{
@@ -54,7 +57,14 @@ public final class Constants {
     public static final double kD = 2.0;
   }
 
-  private static final double SELF_RIGHTING_ARM_ERROR_TOLERANCE = 0;
 
+
+  private static final double SELF_RIGHTING_ARM_ERROR_TOLERANCE = 0;
+  public static final double kPSpeakerAlignRotation = 3.2;
+  public static final double kISpeakerAlignRotation = 0;
+  public static final double kDSpeakerAlignRotation = 0.8;
+  public static double kPNoteAlignRotation = 3;
+  public static double kINoteAlignRotation = 0;
+  public static double kDNoteAlignRotation = 0;
 
 }
