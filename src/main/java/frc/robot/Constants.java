@@ -53,8 +53,8 @@ public final class Constants {
 
   public static final class PIDConstants {
     public static final double kP = 4.0; // TODO: tune the PID values
-    public static final double kI = 2.0;
-    public static final double kD = 2.0;
+    public static final double kI = 3.0;
+    public static final double kD = 3.0;
   }
 
 
@@ -64,7 +64,7 @@ public final class Constants {
   public static final double kISpeakerAlignRotation = 0;
   public static final double kDSpeakerAlignRotation = 0.8;
   public static double kPNoteAlignRotation = 3;
-  public static double kINoteAlignRotation = 0;
-  public static double kDNoteAlignRotation = 0;
+  public static double kINoteAlignRotation = 1;
+  public static double kDNoteAlignRotation = 1;
 
 }

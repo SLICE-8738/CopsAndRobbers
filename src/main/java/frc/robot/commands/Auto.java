@@ -44,7 +44,7 @@ public class Auto extends Command {
   @Override
   public void execute() {
 
-    if(IntakeLimelight.getTable().getTargetDetected() == false){
+    if(IntakeLimelight.getTable().getTargetDetected() == true){
       m_drivetrain.drive(-0.3, 0);
     } 
     else {
@@ -59,7 +59,7 @@ public class Auto extends Command {
   public void end(boolean interrupted) {
 
     m_drivetrain.drive(0,0);
-    LimelightHelpers.setLEDMode_ForceOff("limelight-intake");
+    LimelightHelpers.setLEDMode_ForceOff("limelight-slice");
 
   }
 
@@ -71,7 +71,6 @@ public class Auto extends Command {
     } else{
       return false;
     }
-    
     
   }
 
