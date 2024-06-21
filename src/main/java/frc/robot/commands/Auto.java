@@ -13,7 +13,7 @@ import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.LimelightTable;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.IntakeLimelight;
+import frc.robot.subsystems.SliceLimelight;
 
 public class Auto extends Command {
 
@@ -44,10 +44,10 @@ public class Auto extends Command {
   @Override
   public void execute() {
 
-    if(IntakeLimelight.getTable().getTargetDetected() == true){
+    if(SliceLimelight.getTable().getTargetDetected() == true){
       m_drivetrain.drive(-0.3, 0);
     } 
-    else if (IntakeLimelight.getTable().getTargetDetected() == false){
+    else if (SliceLimelight.getTable().getTargetDetected() == false){
       m_drivetrain.drive(0, 0);
     }
     
@@ -66,7 +66,7 @@ public class Auto extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(IntakeLimelight.getTable().getTargetDetected() == true){
+    if(SliceLimelight.getTable().getTargetDetected() == true){
       return true;
     } else{
       return false;

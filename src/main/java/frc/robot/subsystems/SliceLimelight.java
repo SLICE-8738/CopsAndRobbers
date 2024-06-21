@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.LimelightTable;
 
-public class IntakeLimelight extends SubsystemBase {
+public class SliceLimelight extends SubsystemBase {
 
   private static LimelightTable table = new LimelightTable("limelight-slice");
 
   /** Creates a new IntakeLimelight. */
-  public IntakeLimelight() {}
+  public SliceLimelight() {}
 
   @Override
   public void periodic() {
