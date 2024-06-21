@@ -43,12 +43,14 @@ public class Auto extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if(IntakeLimelight.getTable().getTargetDetected() == true){
-      m_drivetrain.drive(-0.3, 0);
+    boolean detected = IntakeLimelight.getTable().getTargetDetected();
+    System.out.println("Value: " + detected);
+    if(detected){
+      
+      m_drivetrain.drive(0, -0.3);
     } 
-    else if (IntakeLimelight.getTable().getTargetDetected() == false){
-      m_drivetrain.drive(0, 0);
+    else {
+      m_drivetrain.drive(0.3, 0);
     }
     
 
