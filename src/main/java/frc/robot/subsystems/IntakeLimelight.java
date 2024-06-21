@@ -10,7 +10,7 @@ import frc.robot.LimelightTable;
 
 public class IntakeLimelight extends SubsystemBase {
 
-  private static LimelightTable table = new LimelightTable("limelight-intake");
+  private static LimelightTable table = new LimelightTable("limelight-slice");
 
   /** Creates a new IntakeLimelight. */
   public IntakeLimelight() {}
