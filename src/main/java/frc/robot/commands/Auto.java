@@ -47,7 +47,7 @@ public class Auto extends Command {
     if(IntakeLimelight.getTable().getTargetDetected() == true){
       m_drivetrain.drive(-0.3, 0);
     } 
-    else {
+    else if (IntakeLimelight.getTable().getTargetDetected() == false){
       m_drivetrain.drive(0, 0);
     }
     
