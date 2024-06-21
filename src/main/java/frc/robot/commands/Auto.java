@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import org.opencv.core.Mat;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
@@ -20,6 +22,10 @@ public class Auto extends Command {
   private final Drivetrain m_drivetrain;
 
   private final PIDController rotationController;
+
+  private boolean outOfFrame;
+
+  private boolean stopped;
 
   /** Creates a new AlignWithNoteCommand. */
   public Auto(Drivetrain drivetrain) {
@@ -38,19 +44,44 @@ public class Auto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    outOfFrame = false;
+    stopped = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if(SliceLimelight.getTable().getTargetDetected() == true){
-      m_drivetrain.drive(-0.3, 0);
-    } 
-    else if (SliceLimelight.getTable().getTargetDetected() == false){
-      m_drivetrain.drive(0, 0);
-    }
+    double rotation;
+    boolean n = LimelightHelpers.getTV("limelight-slice");
     
+    System.out.println("TV: " + n);
+
+    if (n) {
+      double XOffsetRotation = LimelightHelpers.getTX("limelight-slice");
+
+      rotation = rotationController.calculate(XOffsetRotation);
+
+      System.out.println("Rotation:" + rotation);
+      System.out.println("Rotation XOffset: " + XOffsetRotation);
+
+      if (Math.abs(XOffsetRotation) < 5) {
+        outOfFrame = true;
+        m_drivetrain.drive(0, -0.3);
+      } else if (outOfFrame == false) {
+        m_drivetrain.drive(-0.3, 0);
+      }
+    }
+    else if (outOfFrame == false) {
+      m_drivetrain.drive(-0.3, 0);
+
+      //rotation = 15 * (timer.get() + 3.5) * Math.sin(5 * (timer.get() + 3.5));
+    } else {
+      stopped = true;
+    }
+
+ 
+    
+    //LimelightHelpers.setLEDMode_ForceOn("limelight-slice");
 
   }
 
@@ -59,19 +90,18 @@ public class Auto extends Command {
   public void end(boolean interrupted) {
 
     m_drivetrain.drive(0,0);
-    LimelightHelpers.setLEDMode_ForceOff("limelight-slice");
+    //LimelightHelpers.setLEDMode_ForceOff("limelight-slice");
 
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(SliceLimelight.getTable().getTargetDetected() == true){
+    if (stopped) {
       return true;
-    } else{
+    } else {
       return false;
     }
-    
   }
 
 }

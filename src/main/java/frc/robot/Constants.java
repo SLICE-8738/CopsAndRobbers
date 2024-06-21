@@ -66,5 +66,4 @@ public final class Constants {
   public static double kPNoteAlignRotation = 3;
   public static double kINoteAlignRotation = 0;
   public static double kDNoteAlignRotation = 0;
-
 }
