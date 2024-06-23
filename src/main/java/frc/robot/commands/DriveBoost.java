@@ -4,19 +4,17 @@
 
 package frc.robot.commands;
 
-
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drivetrain;
 
-public class Drive extends Command {
+public class DriveBoost extends Command {
 
   private Drivetrain m_drivetrain;
   private CommandXboxController m_driverController;
 
-  /** Creates a new drive. */
-  public Drive(Drivetrain dT, CommandXboxController cont) {
+  /** Creates a new DriveBoost. */
+  public DriveBoost(Drivetrain dT, CommandXboxController cont) {
     m_drivetrain = dT;
     m_driverController = cont;
     
@@ -31,14 +29,13 @@ public class Drive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(m_driverController.getLeftY() / 2, m_driverController.getRightX() / 2);
+    m_drivetrain.drive(m_driverController.getLeftY() * 1.125, m_driverController.getRightX() * 1.125);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_drivetrain.drive(0, 0);
-
   }
 
   // Returns true when the command should end.

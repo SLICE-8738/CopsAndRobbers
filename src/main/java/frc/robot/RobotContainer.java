@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Auto;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveBoost;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.MoveArms;
 import frc.robot.commands.MoveArmsSeperate;
@@ -14,7 +15,10 @@ import frc.robot.subsystems.Arms;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SliceLimelight;
+import edu.wpi.first.util.concurrent.Event;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -36,14 +40,19 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain(); // Drivetrain Subsystem defined
   private final Arms m_Arms = new Arms();
   
-  private final Joystick m_driveJoystick = new Joystick(0);
-  private final Joystick m_operatorJoystick = new Joystick(1);
 
-  private final Drive m_drivecommand = new Drive(m_drivetrain, m_driveJoystick); // Drive Command defined
-  private final MoveArms m_MoveArms = new MoveArms(m_Arms, m_operatorJoystick);
-  private final MoveArmsSeperate m_MoveArmsSeperate = new MoveArmsSeperate(m_Arms, m_driveJoystick, m_operatorJoystick);
+  private final CommandXboxController m_driveController = new CommandXboxController(0);
+  //private final XboxController m_operatorController = new XboxController(1);
 
-  private final JoystickButton m_MoveArmsSeperateButton = new JoystickButton(m_operatorJoystick, 2);
+
+  private final Trigger m_MoveArmsTrigger = new Trigger(m_driveController.leftBumper());
+  private final Trigger m_DriveBoostTrigger = new Trigger(m_driveController.rightTrigger());
+
+  private final Drive m_drivecommand = new Drive(m_drivetrain, m_driveController); // Drive Command defined
+  private final DriveBoost m_DriveBoostCommand = new DriveBoost(m_drivetrain, m_driveController);
+  private final MoveArms m_MoveArms = new MoveArms(m_Arms);
+  //private final MoveArmsSeperate m_MoveArmsSeperate = new MoveArmsSeperate(m_Arms, m_driveController, m_operatorJoystick);
+
   private final Auto m_Auto = new Auto(m_drivetrain);
   
 
@@ -53,7 +62,6 @@ public class RobotContainer {
     configureBindings();
 
     m_drivetrain.setDefaultCommand(m_drivecommand);
-    m_Arms.setDefaultCommand(m_MoveArms);
   }
 
   /**
@@ -67,8 +75,9 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    m_MoveArmsSeperateButton.toggleOnTrue(m_MoveArmsSeperate);
-    
+    m_MoveArmsTrigger.toggleOnTrue(m_MoveArms);
+    m_DriveBoostTrigger.whileTrue(m_DriveBoostCommand);
+
   }
 
   /**
