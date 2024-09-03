@@ -48,7 +48,6 @@ public final class Constants {
     public static final double kAutoDriveSpeed = 0.5;
   }
 
-  private static final double SELF_RIGHTING_ARM_ERROR_TOLERANCE = 0;
 
 
 }

@@ -26,8 +26,8 @@ import edu.wpi.first.wpilibj.ADIS16448_IMU;
 public class Drivetrain extends SubsystemBase {
   
   private CANSparkMax backLeft, backRight, frontLeft, frontRight; // Back and front motors on left and right.
-  
   private DifferentialDrive drivetrain; // Differential drive
+  
   RelativeEncoder leftEncoder = frontLeft.getEncoder();
   RelativeEncoder rightEncoder = frontRight.getEncoder();
   

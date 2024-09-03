@@ -38,6 +38,7 @@ public class RobotContainer {
 
   private final Drive m_drivecommand = new Drive(m_drivetrain, m_driveJoystick); // Drive Command defined
   private final MoveArms m_MoveArms = new MoveArms(m_Arms, m_operatorJoystick);
+  private final Auto m_Auto = new Auto(m_drivetrain, m_Arms);
 
   
 
@@ -73,6 +74,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Auto.exampleAuto(m_exampleSubsystem);
+    return m_Auto;
   }
 }

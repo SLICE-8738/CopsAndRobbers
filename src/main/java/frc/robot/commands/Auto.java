@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.AutoConstants;
+import frc.robot.subsystems.Arms;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 //import frc.robot.commands.DriveDistance;
@@ -16,19 +17,17 @@ import frc.robot.subsystems.ExampleSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
 public class Auto extends SequentialCommandGroup {
+
+  private Drivetrain m_Drivetrain;
+  private Arms m_Arms;
+
   /** Creates a new Auto. */
-  public Auto(Drivetrain drive) {
+  public Auto(Drivetrain drivetrain, Arms arms) {
+    m_Drivetrain = drivetrain;
+    m_Arms = arms;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    //addCommands(
-     // new DriveDistance(AutoConstants.kAutoDriveDistanceInches, AutoConstants.kAutoDriveSpeed, drive),
-      //new DriveDistance(AutoConstants.kAutoBackupDistanceInches, -AutoConstants.kAutoDriveSpeed, drive)
-      //);
-
+    addCommands(new AutoDrive(drivetrain), new SpinRobot(drivetrain));
   }
 
-  public static Command exampleAuto(ExampleSubsystem m_exampleSubsystem) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'exampleAuto'");
-  }
 }
