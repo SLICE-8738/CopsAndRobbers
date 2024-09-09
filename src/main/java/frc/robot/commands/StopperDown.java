@@ -31,7 +31,7 @@ public class StopperDown extends Command {
   public void execute() {
 
     if (m_Stopper.getPosition() > 0) {
-      m_Stopper.stopperSpeed(-.25);
+      m_Stopper.stopperSpeed(-.15);
    }
 
  }

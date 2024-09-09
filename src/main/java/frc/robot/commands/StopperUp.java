@@ -26,8 +26,8 @@ public class StopperUp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_Stopper.getPosition() < 0.2) {
-       m_Stopper.stopperSpeed(.25);
+    if (m_Stopper.getPosition() < 0.05) {
+       m_Stopper.stopperSpeed(.15);
     }
   }
 
@@ -41,7 +41,7 @@ public class StopperUp extends Command {
   @Override
   public boolean isFinished() {
     
-    if (m_Stopper.getPosition() >= 0.2) {
+    if (m_Stopper.getPosition() >= 0.05) {
        return true;
     } 
 
